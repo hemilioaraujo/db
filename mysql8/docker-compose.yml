@@ -1,0 +1,26 @@
+version: '3.8'
+
+networks:
+  rede-docker:
+    external: true
+    driver: bridge
+    name: rede-docker
+
+services:
+  mysql8023:
+    image: mysql:8.0.23
+    networks:
+      - rede-docker
+    container_name: mysql8023
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: basico
+      MYSQL_USER: hlam
+      MYSQL_PASSWORD: hlam
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./dados:/var/lib/mysql
+
+volumes:
+  mysql8023_data:
